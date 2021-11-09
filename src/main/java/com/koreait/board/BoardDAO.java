@@ -16,11 +16,11 @@ public class BoardDAO {
         try {
             con = DbUtils.getCon();
             ps = con.prepareStatement(sql);
+            //? 에 값 채워야함
             ps.setString(1, param.getTitle());
             ps.setString(2, param.getCtnt());
             ps.setString(3, param.getWriter());
-            return ps.executeUpdate();
-
+            return ps.executeUpdate();//영향을 미친 레코드 수
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,4 +60,36 @@ public class BoardDAO {
         }
         return list;
     }
+
+    public static BoardVO selBoardDetail(BoardVO param) {//선언부는 왠만하면 바뀌지 않는게 좋다(범용성 좋게끔)
+        BoardVO vo = null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " SELECT * FROM t_board " +
+                    " WHERE iboard = ? ";
+
+        try {
+            con = DbUtils.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,param.getIboard());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                vo = new BoardVO();
+                vo.setIboard(param.getIboard());
+                vo.setTitle(rs.getString("title"));
+                vo.setWriter(rs.getString("writer"));
+                vo.setRdt(rs.getString("rdt"));
+                vo.setCtnt(rs.getString("ctnt"));
+                return vo;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(con, ps, rs);
+        }
+        return null;
+    }
+
 }

@@ -35,7 +35,16 @@ public class BoardWriteServlet extends HttpServlet {
 
         int result = BoardDAO.insBoard(param);
 
-        req.setAttribute("data", result);
+        switch (result) {
+            case 1:
+                res.sendRedirect("/list");//주소이동
+                break;
+            default:
+                res.sendRedirect("/write");//주소이동
+                break;
+        }
+
+
 
     }
 }
