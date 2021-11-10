@@ -19,7 +19,7 @@ public class BoardDelServlet extends HttpServlet {
         int iboard = Integer.parseInt(strIboard);
 
         param.setIboard(iboard);
-        int result = BoardDAO.delIboard(param);
+        int result = BoardDAO.delBoard(param);
 
 
         switch (result) {

@@ -31,7 +31,7 @@ public class BoardDAO {
     }
 
     public static List<BoardVO> selBoardList() {
-        List<BoardVO> list = new ArrayList<>();//정보담을 리스트 생성
+        List<BoardVO> list = new ArrayList();//정보담을 리스트 생성
 
         Connection con = null;//연결 초기화
         PreparedStatement ps = null;//쿼리문 초기화
@@ -92,7 +92,7 @@ public class BoardDAO {
         return null;
     }
 
-    public static int updIboard(BoardVO param) {
+    public static int updBoard(BoardVO param) {
         Connection con = null;
         PreparedStatement ps = null;
         String sql = " UPDATE t_board " +
@@ -118,7 +118,7 @@ public class BoardDAO {
         return 0;
     }
 
-    public static int delIboard(BoardVO param) {
+    public static int delBoard(BoardVO param) {
         Connection con = null;
         PreparedStatement ps = null;
         String sql = " DELETE FROM t_board WHERE iboard = ? ";

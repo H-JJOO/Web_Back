@@ -1,6 +1,5 @@
 package com.koreait.board;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +41,7 @@ public class BoardModServlet extends HttpServlet {
         param.setWriter(writer);
         param.setIboard(iboard);
 
-        int result = BoardDAO.updIboard(param);
+        int result = BoardDAO.updBoard(param);
 
         switch (result) {
             case 1:
