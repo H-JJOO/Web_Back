@@ -17,7 +17,9 @@
         <div>
             <input type="submit" value="저장">
             <input type="reset" value="초기화">
+
         </div>
     </form>
+
 </body>
 </html>

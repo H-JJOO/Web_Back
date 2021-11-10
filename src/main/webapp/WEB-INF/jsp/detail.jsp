@@ -12,6 +12,12 @@
     <title>디테일</title>
 </head>
 <body>
+    <div>
+        <a href="/del?iboard=<%=vo.getIboard() %>"><input type="button" value="삭제"></a>
+        <a href="/mod?iboard=<%=vo.getIboard() %>"><input type="button" value="수정"></a>
+        <a href="/list">리스트</a>
+    </div>
+
     <!--표현식-->
     <div>제목 : <%=vo.getTitle()%></div>
     <div>작성자 : <%=vo.getWriter()%></div>
