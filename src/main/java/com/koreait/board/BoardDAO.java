@@ -61,6 +61,8 @@ public class BoardDAO {
         return list;
     }
 
+
+
     public static BoardVO selBoardDetail(BoardVO param) {//선언부는 왠만하면 바뀌지 않는게 좋다(범용성 좋게끔)
         BoardVO vo = null;
         Connection con = null;
@@ -90,6 +92,62 @@ public class BoardDAO {
             DbUtils.close(con, ps, rs);
         }
         return null;
+    }
+
+    //이전글 iboard 값 가져오기 (새로운글)
+    public static int selPrevIboard(BoardVO param) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " SELECT iboard FROM t_board " +
+                " WHERE iboard > ? " +
+                " ORDER BY iboard " +
+                " LIMIT 1 ";
+
+        try {
+            con = DbUtils.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, param.getIboard());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("iboard");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(con, ps, rs);
+        }
+        return 0;
+    }
+
+    //다음글 iboard 값 가져오기 (옛날글)
+    public static int selNextIboard(BoardVO param) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = " SELECT iboard FROM t_board " +
+                " WHERE iboard < ? " +
+                " ORDER BY iboard DESC " +
+                " LIMIT 1 ";
+
+        try {
+            con = DbUtils.getCon();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, param.getIboard());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("iboard");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.close(con, ps, rs);
+        }
+        return 0;
     }
 
     public static int updBoard(BoardVO param) {

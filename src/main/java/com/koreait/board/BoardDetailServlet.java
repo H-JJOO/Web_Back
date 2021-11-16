@@ -21,7 +21,12 @@ public class BoardDetailServlet extends HttpServlet {
 
         BoardVO data = BoardDAO.selBoardDetail(param);//data 에 DAO 값 넣기
 
+        int prevIboard = BoardDAO.selPrevIboard(param);
+        int nextIboard = BoardDAO.selNextIboard(param);
+
         req.setAttribute("data", data);//키 벨류 값 줘서 입력
+        req.setAttribute("prevIboard", prevIboard);
+        req.setAttribute("nextIboard", nextIboard);
 
         String path = "/WEB-INF/jsp/detail.jsp";
         req.getRequestDispatcher(path).forward(req, res);
